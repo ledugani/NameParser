@@ -1,4 +1,5 @@
 ﻿using System;
+using NameParser.Names;
 
 namespace NameParser
 {
@@ -7,47 +8,22 @@ namespace NameParser
         static void Main(string[] args)
         {
             // first name
-            Console.WriteLine("Enter your first name");
-            var firstName = Console.ReadLine();
-
-            foreach(var letter in firstName)
-            {
-                Console.WriteLine(letter);
-            }
+            var firstName = new FirstName();
+            firstName.GetName();
+            firstName.PrintName();
 
             // last name
-            Console.WriteLine("Enter your last name");
-            var lastName = Console.ReadLine();
-            var lastNameWithSpaces = "";
-
-            foreach(var letter in lastName.ToUpper())
-            {
-                lastNameWithSpaces += letter + " ";
-            }
-
-            Console.WriteLine(lastNameWithSpaces.Trim());
+            var lastName = new LastName();
+            lastName.GetName();
+            lastName.PrintName();
 
             // middle name
-            Console.WriteLine("Do you have a middle name? (y/n)");
-            var hasMiddleName = Console.ReadLine();
+            var middleName = new MiddleName();
+            middleName.GetName(firstName.Name);
+            middleName.PrintName();
 
-            if (hasMiddleName == "y")
-            {
-                Console.WriteLine("What is your middle name?");
-                var middleName = Console.ReadLine();
-                var i = 0;
-
-                foreach(var letter in middleName)
-                {
-                    Console.WriteLine(letter.ToString().PadLeft(++i));
-                }
-            }
-            else
-            {
-                Console.WriteLine("Well, that sucks.");
-            }
-
-            Console.WriteLine("Press enter to exit");
+            // full name and goodbye
+            Console.WriteLine($"Goodbye {firstName} {middleName} {lastName}. Press enter to exit.");
             Console.ReadLine();
         }
     }
